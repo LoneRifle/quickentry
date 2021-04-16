@@ -117,10 +117,11 @@
 		Close
 	</button>
 
+	<h2>Add SafeEntry QR</h2>
+
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video id="qr-cam"></video>
 
-	<h2>Add Link</h2>
 	<div class="field">
 		<label for="url">URL: </label>
 		<input
