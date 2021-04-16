@@ -2,7 +2,9 @@
 import EntryModal from './EntryModal.svelte'
 
 let showModal = false
+let showLinkManagement = false
 let links: { name: string, url: string, ts: number }[] = JSON.parse(window.localStorage.getItem('links')) || []
+
 function handleClick() {
   showModal = true
 }
@@ -20,10 +22,18 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 
 <main>
   <button on:click={handleClick}>Add SafeEntry QR</button>
+  <div class="menu-bar">
+    <span class="force-right"/>
+    <span class="manage-links" on:click={() => (showLinkManagement = !showLinkManagement)}>
+      { showLinkManagement ? 'Continue' : 'Manage Links' }
+    </span>
+  </div>
   {#each links as link }
-    <div class="link">
-      <a target="_blank" href="{ link.url }">{ link.name }</a>
-      <button class="link-remove" on:click={() => handleRemove(link)}>x</button>
+    <div class={ showLinkManagement ? 'link-management' : 'link' }>
+      <a class="link-text" target="_blank" href="{ link.url }">{ link.name }</a>
+      {#if showLinkManagement}
+        <button class="link-remove" on:click={() => handleRemove(link)}>x</button>
+      {/if}
     </div>
   {/each}
 
@@ -40,9 +50,37 @@ function handleRemove({ name, url }: { name: string, url: string }) {
     margin: 0 auto;
   }
 
+  .link {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .link-management {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+  }
+
+  .link-text {
+    padding: 1em;
+  }
+
   .link-remove {
     cursor: pointer;
     margin-left: 3px;
+    margin-bottom: 0;
+  }
+
+  .menu-bar {
+    display: flex;
+  }
+
+  .force-right {
+    flex: 1;
+  }
+
+  .manage-links {
+    cursor: pointer;
+    color: rgb(0,100,200);
   }
 
   @media (min-width: 640px) {
