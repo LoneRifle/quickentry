@@ -87,8 +87,8 @@
 		min-width: 10%;
 	}
 
-  h2 {
-		font-size: 2rem;
+	h2 {
+		font-size: 1.5rem;
 		text-align: center;
 	}
 	
