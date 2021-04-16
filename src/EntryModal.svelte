@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'
   import QRScanner from 'qr-scanner'
-  QRScanner.WORKER_PATH = '/assets/js/qr/qr-scanner-worker-min.js'
+  QRScanner.WORKER_PATH = '/assets/js/qr/qr-scanner-worker.min.js'
 
   let qrScanner
 
