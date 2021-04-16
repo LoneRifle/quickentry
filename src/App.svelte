@@ -19,7 +19,7 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 </script>
 
 <main>
-	<button on:click={handleClick}>Add New Link</button>
+	<button on:click={handleClick}>Add SafeEntry QR</button>
 	{#each links as link }
 		<div class="link">
 			<a target="_blank" href="{ link.url }">{ link.name }</a>
