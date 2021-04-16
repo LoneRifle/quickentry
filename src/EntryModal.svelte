@@ -3,7 +3,7 @@
   import QRScanner from 'qr-scanner'
   QRScanner.WORKER_PATH = '/assets/js/qr/qr-scanner-worker.min.js'
 
-  let qrScanner
+  let qrScanner: QRScanner
 
   const dispatch = createEventDispatcher()
   const close = () => dispatch('close')
@@ -14,11 +14,14 @@
   const onChange: (name: any) => void = () => {}
 
   function parseQR(link: string) {
-    const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
-    const id = /login\/(.*)$/.exec(resolvedLink)[1]
-    url = resolvedLink
-    const idWithoutPrefix = id.replace(/^[^-]+-/, '').replace(/-SE$/, '')
-    name = idWithoutPrefix
+    if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://safeentry-qr.gov.sg/')) {
+      const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
+      const id = /login\/(.*)$/.exec(resolvedLink)[1]
+      const idWithoutPrefix = id.replace(/^[^-]+-/, '').replace(/-SE$/, '')
+
+      url = resolvedLink
+      name = idWithoutPrefix
+    }
   }
 
   onMount(() => {
@@ -32,7 +35,7 @@
     close()
   }
   
-  function _onOkay() {
+  function _onAdd() {
     add({ url, name })
     qrScanner && qrScanner.destroy()
     close()
@@ -128,7 +131,7 @@
       type="text"
       name="url"
       bind:value={url}
-      on:keydown={e => e.which === 13 && _onOkay()} />
+      on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="field">
     <label for="name">Name: </label>
@@ -136,14 +139,14 @@
       type="text"
       name="name"
       bind:value={name}
-      on:keydown={e => e.which === 13 && _onOkay()} />
+      on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="buttons">
     <button on:click={_onCancel}>
       Cancel
     </button>
-    <button on:click={_onOkay}>
-      Okay
+    <button on:click={_onAdd}>
+      Add
     </button>
   </div>
 </div>
