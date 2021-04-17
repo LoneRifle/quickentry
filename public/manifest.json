@@ -1,0 +1,12 @@
+{
+  "name": "QuickEntry",
+  "description": "Quickly check into SafeEntry",
+  "display": "standalone",
+  "background_color": "#121212",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml"
+    }
+  ]
+}
