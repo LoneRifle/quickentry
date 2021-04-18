@@ -99,6 +99,10 @@
     width: 95%;
   }
   
+  input[type=url] {
+    width: 100%;
+  }
+
   .buttons {
     display: flex;
     float: right;
@@ -122,9 +126,9 @@
   <video id="qr-cam"></video>
 
   <div class="field">
-    <label for="url">URL: </label>
     <input
-      type="text"
+      disabled
+      type="url"
       name="url"
       bind:value={url}
       on:keydown={e => e.which === 13 && _onAdd()} />
