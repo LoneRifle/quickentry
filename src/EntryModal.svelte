@@ -101,7 +101,14 @@
   
   .buttons {
     display: flex;
-    justify-content: space-between;
+    float: right;
+  }
+
+  .cancel {
+    color: rgb(0,150,200);
+    cursor: pointer;
+    line-height: 32px;
+    margin-right: 16px;
   }
 </style>
 
@@ -131,9 +138,9 @@
       on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="buttons">
-    <button on:click={_onCancel}>
+    <span class="cancel" on:click={_onCancel}>
       Cancel
-    </button>
+    </span>
     <button on:click={_onAdd}>
       Add
     </button>
