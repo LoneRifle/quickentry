@@ -21,10 +21,14 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 </script>
 
 <main>
-  <div class="menu-bar">
+  <section class="menu-bar">
+    <div class="menu-logo">
+      <img src="/favicon.svg" />
+      <span class="text">QuickEntry</span>
+    </div>
     <button on:click={handleClick}>Add SafeEntry QR</button>
-  </div>
-  <div class="links-container">
+  </section>
+  <section class="links-container">
     <div class="links-options">
       <div class="links-title">Saved Places</div>
       <div class="manage-links" on:click={() => (showLinkManagement = !showLinkManagement)}>
@@ -44,7 +48,7 @@ function handleRemove({ name, url }: { name: string, url: string }) {
           </div>
       {/each}
     </div>
-  </div>
+  </section>
   {#if showModal}
     <EntryModal on:add={handleAdd} on:close={() => (showModal = false)}/>
   {/if}
@@ -59,6 +63,21 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 
   .menu-bar {
     display: flex;
+    justify-content: space-between;
+  }
+
+  .menu-logo {
+    display: inline-block;
+  }
+
+  .menu-logo > img {
+    height: 32px;
+    width: 32px;
+  }
+
+  .menu-logo > .text {
+    vertical-align: super;
+    font-size: 24px;
   }
 
   .links-container {
