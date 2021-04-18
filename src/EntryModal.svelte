@@ -103,22 +103,11 @@
     display: flex;
     justify-content: space-between;
   }
-  
-  .close {
-    position: absolute;
-    top: -2rem;
-    right: 0;
-    background: black;
-  }
 </style>
 
-<div class="modal-background" on:click={close}></div>
+<div class="modal-background" on:click={_onCancel}></div>
 
 <div class="modal" role="dialog" aria-modal="true">
-
-  <button class="close" on:click={_onCancel}>
-    Close
-  </button>
 
   <h2>Add SafeEntry QR</h2>
 
