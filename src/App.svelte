@@ -21,22 +21,30 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 </script>
 
 <main>
-  <button on:click={handleClick}>Add SafeEntry QR</button>
   <div class="menu-bar">
-    <span class="force-right"/>
-    <span class="manage-links" on:click={() => (showLinkManagement = !showLinkManagement)}>
-      { showLinkManagement ? 'Continue' : 'Manage Links' }
-    </span>
+    <button on:click={handleClick}>Add SafeEntry QR</button>
   </div>
-  {#each links as link }
-    <div class={ showLinkManagement ? 'link-management' : 'link' }>
-      <a class="link-text" target="_blank" href="{ link.url }">{ link.name }</a>
-      {#if showLinkManagement}
-        <button class="link-remove" on:click={() => handleRemove(link)}>x</button>
-      {/if}
+  <div class="links-container">
+    <div class="links-options">
+      <div class="links-title">Saved Places</div>
+      <div class="manage-links" on:click={() => (showLinkManagement = !showLinkManagement)}>
+        { showLinkManagement ? 'Done' : 'Manage' }
+      </div>
     </div>
-  {/each}
-
+    <div class="links">
+      {#each links as link }
+          <div class={ showLinkManagement ? 'link-management' : 'link' }>
+            <a target="_blank" href="{ link.url }">
+              <img src="/assets/images/map-marker-outline.svg" />
+              <div class="link-text">{ link.name }</div>
+            </a>
+            {#if showLinkManagement}
+                <button class="link-remove" on:click={() => handleRemove(link)}>x</button>
+            {/if}
+          </div>
+      {/each}
+    </div>
+  </div>
   {#if showModal}
     <EntryModal on:add={handleAdd} on:close={() => (showModal = false)}/>
   {/if}
@@ -46,18 +54,49 @@ function handleRemove({ name, url }: { name: string, url: string }) {
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
+    max-width: none;
+  }
+
+  .menu-bar {
+    display: flex;
+  }
+
+  .links-container {
+    display: block;
+  }
+
+  .links-title {
+    font-weight: bolder;
+  }
+
+  .links-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5em 0;
+  }
+
+  .manage-links {
+    cursor: pointer;
+    color: rgb(0,100,200);
   }
 
   .link {
     display: grid;
     grid-template-columns: 1fr;
+    padding: 0 1em;
+    text-align: left;
   }
 
   .link-management {
     display: grid;
     grid-template-columns: 1fr 40px;
+    padding: 0 1em;
+    text-align: left;
+  }
+
+
+  .link a, .link-management a {
+    display: flex;
   }
 
   .link-text {
@@ -68,24 +107,5 @@ function handleRemove({ name, url }: { name: string, url: string }) {
     cursor: pointer;
     margin-left: 3px;
     margin-bottom: 0;
-  }
-
-  .menu-bar {
-    display: flex;
-  }
-
-  .force-right {
-    flex: 1;
-  }
-
-  .manage-links {
-    cursor: pointer;
-    color: rgb(0,100,200);
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
   }
 </style>
