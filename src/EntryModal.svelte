@@ -16,11 +16,8 @@
   function parseQR(link: string) {
     if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://safeentry-qr.gov.sg/')) {
       const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
-      const id = /login\/(.*)$/.exec(resolvedLink)[1]
-      const idWithoutPrefix = id.replace(/^[^-]+-/, '').replace(/-SE$/, '')
-
       url = resolvedLink
-      name = idWithoutPrefix
+      document.getElementById('name').focus()
     }
   }
 
@@ -84,22 +81,12 @@
     display: flex;
   }
 
-  .field label {
-    margin-top: 4px;
-    margin-right: 4px;
-    min-width: 10%;
-  }
-
   h2 {
     font-size: 1.5rem;
     text-align: center;
   }
-  
+
   input {
-    width: 95%;
-  }
-  
-  input[type=url] {
     width: 100%;
   }
 
@@ -129,15 +116,17 @@
     <input
       disabled
       type="url"
+      id="url"
       name="url"
       bind:value={url}
       on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="field">
-    <label for="name">Name: </label>
     <input
       type="text"
+      id="name"
       name="name"
+      placeholder="Give a name for this location"
       bind:value={name}
       on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
@@ -145,7 +134,7 @@
     <span class="cancel" on:click={_onCancel}>
       Cancel
     </span>
-    <button on:click={_onAdd}>
+    <button on:click={_onAdd} disabled={!(url && name && url.length > 0 && name.length > 0)}>
       Add
     </button>
   </div>

@@ -23,7 +23,7 @@ function handleRemove({ name, url }: { name: string, url: string }) {
 <main>
   <section class="menu-bar">
     <div class="menu-logo">
-      <img src="/favicon.svg" />
+      <img alt="favicon" src="/favicon.svg" />
       <span class="text">QuickEntry</span>
     </div>
     <button on:click={handleClick}>Add SafeEntry QR</button>
@@ -39,7 +39,7 @@ function handleRemove({ name, url }: { name: string, url: string }) {
       {#each links as link }
           <div class={ showLinkManagement ? 'link-management' : 'link' }>
             <a target="_blank" href="{ link.url }">
-              <img src="/assets/images/map-marker-outline.svg" />
+              <img alt="logo" src="/assets/images/map-marker-outline.svg" />
               <div class="link-text">{ link.name }</div>
             </a>
             {#if showLinkManagement}
