@@ -7,6 +7,10 @@
     {
       "src": "favicon.svg",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "favicon-200x200.png",
+      "type": "image/png"
     }
   ]
 }
