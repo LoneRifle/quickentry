@@ -14,7 +14,7 @@
   const onChange: (name: any) => void = () => {}
 
   function parseQR(link: string) {
-    if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://safeentry-qr.gov.sg/')) {
+    if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://www.safeentry-qr.gov.sg/')) {
       const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
       url = resolvedLink
       document.getElementById('name').focus()
