@@ -6,6 +6,8 @@
   let qrScanner: QRScanner
   let videoElem: HTMLVideoElement
 
+  let nameElem: HTMLElement
+
   const dispatch = createEventDispatcher()
   const close = () => dispatch('close')
   const add = (entry: any) => dispatch('add', entry)
@@ -18,7 +20,7 @@
     if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://safeentry-qr.gov.sg/')) {
       const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
       url = resolvedLink
-      document.getElementById('name').focus()
+      nameElem.focus()
     }
   }
 
@@ -128,6 +130,7 @@
       name="name"
       placeholder="Give a name for this location"
       bind:value={name}
+      bind:this={nameElem}
       on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="buttons">
