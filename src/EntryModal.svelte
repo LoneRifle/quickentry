@@ -4,6 +4,9 @@
   QRScanner.WORKER_PATH = '/assets/js/qr/qr-scanner-worker.min.js'
 
   let qrScanner: QRScanner
+  let videoElem: HTMLVideoElement
+
+  let nameElem: HTMLElement
 
   const dispatch = createEventDispatcher()
   const close = () => dispatch('close')
@@ -17,12 +20,11 @@
     if (link.startsWith('https://temperaturepass.ndi-api.gov.sg/') || link.startsWith('https://www.safeentry-qr.gov.sg/')) {
       const resolvedLink = link.replace('temperaturepass.ndi-api.gov.sg', 'www.safeentry-qr.gov.sg')
       url = resolvedLink
-      document.getElementById('name').focus()
+      nameElem.focus()
     }
   }
 
   onMount(() => {
-    const videoElem = document.getElementById('qr-cam') as HTMLVideoElement
     qrScanner = new QRScanner(videoElem, parseQR)
     qrScanner.start()
   })
@@ -110,7 +112,7 @@
   <h2>Add SafeEntry QR</h2>
 
   <!-- svelte-ignore a11y-media-has-caption -->
-  <video id="qr-cam"></video>
+  <video id="qr-cam" bind:this={videoElem}></video>
 
   <div class="field">
     <input
@@ -128,6 +130,7 @@
       name="name"
       placeholder="Give a name for this location"
       bind:value={name}
+      bind:this={nameElem}
       on:keydown={e => e.which === 13 && _onAdd()} />
   </div>
   <div class="buttons">
