@@ -54,7 +54,7 @@ function handleRemove({ name, url }: { name: string, url: string }) {
   {/if}
 </main>
 <footer>
-  Made quickly by 
+  <a target="_blank" href="https://github.com/LoneRifle/quickentry">Made</a> quickly by 
   <a target="_blank" href="https://github.com/LoneRifle">@LoneRifle</a> 
   and <a target="_blank" href="https://github.com/tatatee">@tatatee</a>
 </footer>
