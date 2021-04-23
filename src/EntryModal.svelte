@@ -4,6 +4,7 @@
   QRScanner.WORKER_PATH = '/assets/js/qr/qr-scanner-worker.min.js'
 
   let qrScanner: QRScanner
+  let videoElem: HTMLVideoElement
 
   const dispatch = createEventDispatcher()
   const close = () => dispatch('close')
@@ -22,7 +23,6 @@
   }
 
   onMount(() => {
-    const videoElem = document.getElementById('qr-cam') as HTMLVideoElement
     qrScanner = new QRScanner(videoElem, parseQR)
     qrScanner.start()
   })
@@ -110,7 +110,7 @@
   <h2>Add SafeEntry QR</h2>
 
   <!-- svelte-ignore a11y-media-has-caption -->
-  <video id="qr-cam"></video>
+  <video id="qr-cam" bind:this={videoElem}></video>
 
   <div class="field">
     <input
