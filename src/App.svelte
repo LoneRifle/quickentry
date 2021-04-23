@@ -53,12 +53,27 @@ function handleRemove({ name, url }: { name: string, url: string }) {
     <EntryModal on:add={handleAdd} on:close={() => (showModal = false)}/>
   {/if}
 </main>
-
+<footer>
+  Made quickly by 
+  <a target="_blank" href="https://github.com/LoneRifle">@LoneRifle</a> 
+  and <a target="_blank" href="https://github.com/tatatee">@tatatee</a>
+</footer>
 <style>
   main {
     text-align: center;
     padding: 1em;
     max-width: none;
+    min-height: 91vh;
+  }
+
+  footer {
+    text-align: center;
+    font-size: small;
+    color: #9B9A9C;
+  }
+
+  footer a {
+    color: #9B9A9C;
   }
 
   .menu-bar {
